@@ -1,0 +1,88 @@
+# Endpoint Register — Synthetic Example
+# ============================================================
+# Illustrative sample only. Every service, path, team, date and control
+# below is fictional. It is not a record of any real organisation,
+# product, deployment or risk decision. Replace each entry with
+# evidence from your own system.
+#
+# Purpose: one entry per HTTP endpoint, so a scanner can compare the
+# routes in code against what the threat model already covers.
+#
+# How an entry is added or changed (one pull request):
+#   1. Developer      - adds the route and writes the register entry.
+#   2. Developer      - adds the matching row in the STRIDE register.
+#   3. Scanner (CI)   - fails the build if a route has no entry or an
+#                       entry is missing a required field.
+#   4. Security owner - reviews rating, controls and STRIDE row;
+#                       approves or requests changes.
+#   5. Service owner  - confirms the endpoint's purpose and callers.
+#   6. Merge          - allowed only after steps 3-5 pass.
+#
+# Review trigger: a new route, a changed authentication rule, a new
+# caller, or a change to the data the endpoint handles.
+#
+# risk_rating values: Low | Medium | High
+# ============================================================
+
+endpoints:
+
+  - service: example-orchestrator
+    method: POST
+    path: /v1/work-items
+    stride_surface: "Service-to-service HTTP calls"
+    risk_rating: High
+    registered_by: example-platform-team
+    reviewed_by: example-security-owner
+    registered_at: "2025-01-15"
+    next_review: "2025-07-15"
+    controls:
+      - Mutual TLS between services
+      - Token validation on every request
+      - Request size and rate limits
+    notes: >
+      Entry point for work submitted by other services. High risk because
+      it can start downstream actions. Verify the controls with a test
+      that sends an unauthenticated and an oversized request.
+
+  - service: example-orchestrator
+    method: GET
+    path: /v1/work-items/{id}
+    stride_surface: "Service-to-service HTTP calls"
+    risk_rating: Low
+    registered_by: example-platform-team
+    reviewed_by: example-security-owner
+    registered_at: "2025-01-15"
+    next_review: "2025-07-15"
+    controls: []
+    notes: Read-only status check; no state change.
+
+  - service: example-tool-gateway
+    method: POST
+    path: /v1/tools/invoke
+    stride_surface: "Tool invocations"
+    risk_rating: High
+    registered_by: example-agent-team
+    reviewed_by: example-security-owner
+    registered_at: "2025-02-03"
+    next_review: "2025-08-03"
+    controls:
+      - Per-agent allow-list of tools
+      - Audit record for every call
+    notes: >
+      Where an agent asks for a tool to run. Permissions are enforced here,
+      not in the agent prompt. Add a test for a denied tool.
+
+  - service: example-reporting-api
+    method: GET
+    path: /v1/coverage
+    stride_surface: "Service-to-service HTTP calls"
+    risk_rating: Medium
+    registered_by: example-governance-team
+    reviewed_by: example-security-owner
+    registered_at: "2025-03-10"
+    next_review: "2025-09-10"
+    controls:
+      - Review of response for sensitive detail before publication
+    notes: >
+      Publishes declared coverage. It shows what the register claims, not
+      whether each control works. Include the date and open gaps.
