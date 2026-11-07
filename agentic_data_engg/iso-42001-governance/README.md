@@ -3,12 +3,14 @@
 These files are fictional teaching examples for readers who want to adapt a
 small set of AI governance documents:
 
-- `ai-governance-policy-synthetic-example.md` shows principles, scope, and
-  policy-level responsibilities.
-- `aims-charter-synthetic-example.md` shows how to define an AI management
-  system's boundaries, governance process, objectives, and review.
-- `roles-responsibilities-matrix-synthetic-example.md` shows how to assign
-  accountability and separate preparation, approval, operation, and assurance.
+- [AI governance policy](https://github.com/neerajg5/tech_samples/blob/main/iso-42001-governance/ai-governance-policy-synthetic-example.md)
+  shows principles, scope, and policy-level responsibilities.
+- [AIMS charter](https://github.com/neerajg5/tech_samples/blob/main/iso-42001-governance/aims-charter-synthetic-example.md)
+  shows how to define an AI management system's boundaries, governance process,
+  objectives, and review.
+- [Roles and responsibilities matrix](https://github.com/neerajg5/tech_samples/blob/main/iso-42001-governance/roles-responsibilities-matrix-synthetic-example.md)
+  shows how to assign accountability and separate preparation, approval,
+  operation, and assurance.
 
 All organisation names, systems, roles, scenarios, measures, and workflows are
 invented. The samples do not reproduce the source project's internal documents,
